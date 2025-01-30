@@ -7,6 +7,8 @@ namespace Monogame_test;
 public class Game1 : Game
 {
     Texture2D xwing;
+    Player player;
+    Enemy enemy;
     Vector2 xwingPos = new Vector2(100,300);
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -30,7 +32,12 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         // TODO: use this.Content to load your game content here
-        xwing = Content.Load<Texture2D>("xwing");
+        //xwing = Content.Load<Texture2D>("xwing");
+        xwing = new Texture2D(GraphicsDevice, 1, 1);
+        xwing.SetData(new Color[]{Color.White});
+
+        player = new Player(xwing);
+        enemy = new Enemy(xwing);
     }
 
     protected override void Update(GameTime gameTime)
@@ -39,14 +46,8 @@ public class Game1 : Game
             Exit();
 
         // TODO: Add your update logic here
-        KeyboardState kstate = Keyboard.GetState();
-        if(kstate.IsKeyDown(Keys.Right)){
-            xwingPos.X++;
-        }
-        if(kstate.IsKeyDown(Keys.Left)){
-            xwingPos.X--;
-        }
-
+        player.Update();
+        enemy.Update();
         base.Update(gameTime);
     }
 
@@ -56,7 +57,8 @@ public class Game1 : Game
 
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
-        _spriteBatch.Draw(xwing, xwingPos, Color.White);
+        player.Draw(_spriteBatch);
+        enemy.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
