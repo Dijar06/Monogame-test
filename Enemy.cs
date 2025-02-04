@@ -5,10 +5,20 @@ namespace Monogame_test
 {
     public class Enemy : BaseClass
     {
+        float velocity = -1;
+        float timer = 0;
         public Enemy(Texture2D texture, Vector2 position) : base(texture, position){}
 
         public override void Update(){
-            position.Y--;
+            timer += 1f/60f;
+            if(position.Y <= 0 || position.Y >= 460){
+                velocity *= -1;
+            }
+            if(timer >= 10){
+                velocity = 0;
+            }
+            position.Y += velocity;
+            // y = y + (+1) = y + 1
         }
     }
 }

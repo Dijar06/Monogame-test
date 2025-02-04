@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Monogame_test
 {
-    abstract class BaseClass
+    public abstract class BaseClass
     {
         protected Texture2D texture;
         protected Vector2 position;

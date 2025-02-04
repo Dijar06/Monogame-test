@@ -36,8 +36,8 @@ public class Game1 : Game
         xwing = new Texture2D(GraphicsDevice, 1, 1);
         xwing.SetData(new Color[]{Color.White});
 
-        player = new Player(xwing);
-        enemy = new Enemy(xwing);
+        player = new Player(xwing, xwingPos);
+        enemy = new Enemy(xwing, xwingPos);
     }
 
     protected override void Update(GameTime gameTime)

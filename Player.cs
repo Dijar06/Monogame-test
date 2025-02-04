@@ -8,13 +8,19 @@ namespace Monogame_test
     {
         public Player(Texture2D texture, Vector2 position) : base(texture, position){}
 
-        public virtual void Update(){
+        public override void Update(){
             KeyboardState kstate = Keyboard.GetState();
-            if(kstate.IsKeyDown(Keys.Right)){
+            if(kstate.IsKeyDown(Keys.D)){
                 position.X++;
             }
-            if(kstate.IsKeyDown(Keys.Left)){
+            if(kstate.IsKeyDown(Keys.A)){
                 position.X--;
+            }
+            if(kstate.IsKeyDown(Keys.W)){
+                position.Y--;
+            }
+            if(kstate.IsKeyDown(Keys.S)){
+                position.Y++;
             }
         }
     }
