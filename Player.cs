@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -6,6 +7,12 @@ namespace Monogame_test
 {
     public class Player : BaseClass
     {
+        List<Bullet> bullets = new List<Bullet>();
+        MouseState oldState;
+
+        public List<Bullet> Bullets{
+            get{return bullets;}
+        }
         public Player(Texture2D texture, Vector2 position) : base(texture, position){}
 
         public override void Update(){
@@ -22,6 +29,17 @@ namespace Monogame_test
             if(kstate.IsKeyDown(Keys.S)){
                 position.Y++;
             }
+
+            MouseState mState = Mouse.GetState();
+            Vector2 vel = mState.Position.ToVector2() - position;
+            vel.Normalize();
+
+            if(mState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released){
+                Bullet bullet1 = new Bullet(texture, position, vel);
+                bullets.Add(bullet1);
+            }
+
+            oldState = mState;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Monogame_test
             if(position.Y <= 0 || position.Y >= 460){
                 velocity *= -1;
             }
-            if(timer >= 10){
+            if(timer >= 100){
                 velocity = 0;
             }
             position.Y += velocity;

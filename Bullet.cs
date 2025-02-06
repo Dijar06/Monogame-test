@@ -7,11 +7,12 @@ namespace Monogame_test
     {
         Vector2 velocity;
 
-        public Bullet(Texture2D texture, Vector2 position) : base(texture, position){}
-
+        public Bullet(Texture2D texture, Vector2 position, Vector2 velocity) : base(texture, position){
+            this.velocity = velocity;
+        }
 
         public override void Update(){
-            position.Y--;
+            position += velocity;
         }
     }
 }
