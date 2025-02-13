@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,6 +13,8 @@ public class Game1 : Game
     Bullet bullet;
     Vector2 playerPos = new Vector2(100,300);
     Vector2 enemyPos = new Vector2(500,300);
+
+    List<BaseClass> entities = new List<BaseClass>();
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -41,19 +44,33 @@ public class Game1 : Game
 
         player = new Player(xwing, playerPos);
         enemy = new Enemy(xwing, enemyPos);
+        entities.Add(enemy);
     }
 
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
+        var bullets = player.Bullets;
         // TODO: Add your update logic here
         player.Update();
-        enemy.Update();
-        foreach (var bullet in player.Bullets){
+        //enemy.Update();
+        foreach(var e in entities){
+            e.Update();
+        }
+        foreach (var bullet in bullets){
             bullet.Update();
         }
+
+        for(int i = 0; i < bullets.Count; i++){
+            for(int j = 0; j < entities.Count; j++){
+                if(bullets[i].Hitbox.Intersects(entities[j].Hitbox)){
+                    entities.RemoveAt(j);
+                    j--;
+                }
+            }
+        }
+
         base.Update(gameTime);
     }
 

@@ -7,6 +7,11 @@ namespace Monogame_test
     {
         protected Texture2D texture;
         protected Vector2 position;
+        protected Rectangle hitbox = new Rectangle();
+
+        public Rectangle Hitbox{
+            get {return hitbox;}
+        }
 
         public BaseClass(Texture2D texture, Vector2 position){
             this.texture = texture;

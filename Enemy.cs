@@ -7,7 +7,9 @@ namespace Monogame_test
     {
         float velocity = -1;
         float timer = 0;
-        public Enemy(Texture2D texture, Vector2 position) : base(texture, position){}
+        public Enemy(Texture2D texture, Vector2 position) : base(texture, position){
+            hitbox.Size = new Point(10,10);
+        }
 
         public override void Update(){
             timer += 1f/60f;
@@ -18,6 +20,7 @@ namespace Monogame_test
                 velocity = 0;
             }
             position.Y += velocity;
+            hitbox.Location = position.ToPoint();
             // y = y + (+1) = y + 1
         }
     }
