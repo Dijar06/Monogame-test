@@ -9,7 +9,6 @@ public class Game1 : Game
 {
     Texture2D xwing;
     Player player;
-    Enemy enemy;
     Bullet bullet;
     Vector2 playerPos = new Vector2(100,300);
     Vector2 enemyPos = new Vector2(500,300);
@@ -42,8 +41,8 @@ public class Game1 : Game
         xwing = new Texture2D(GraphicsDevice, 1, 1);
         xwing.SetData(new Color[]{Color.White});
 
-        player = new Player(xwing, playerPos);
-        enemy = new Enemy(xwing, enemyPos);
+        player = new Player(xwing, playerPos, Color.Green);
+        Enemy enemy = new Enemy(xwing, enemyPos, Color.Red);
         entities.Add(enemy);
     }
 
@@ -81,9 +80,11 @@ public class Game1 : Game
         // TODO: Add your drawing code here
         _spriteBatch.Begin();
         player.Draw(_spriteBatch);
-        enemy.Draw(_spriteBatch);
         foreach (var bullet in player.Bullets){
             bullet.Draw(_spriteBatch);
+        }
+        foreach (var enemy in entities){
+            enemy.Draw(_spriteBatch);
         }
         _spriteBatch.End();
 

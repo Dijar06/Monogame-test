@@ -7,22 +7,23 @@ namespace Monogame_test
     {
         protected Texture2D texture;
         protected Vector2 position;
+        protected Color color;
         protected Rectangle hitbox = new Rectangle();
 
         public Rectangle Hitbox{
             get {return hitbox;}
         }
 
-        public BaseClass(Texture2D texture, Vector2 position){
+        public BaseClass(Texture2D texture, Vector2 position, Color color){
             this.texture = texture;
             this.position = position;
+            this.color = color;
         }
 
         public abstract void Update();
 
         public virtual void Draw(SpriteBatch spriteBatch){
-            Rectangle rectangle = new Rectangle((int)position.X, (int)position.Y, 10, 10);
-            spriteBatch.Draw(texture, rectangle, Color.White);
+            spriteBatch.Draw(texture, hitbox, color);
         }
     }
 }

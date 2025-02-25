@@ -7,7 +7,7 @@ namespace Monogame_test
     {
         float velocity = -1;
         float timer = 0;
-        public Enemy(Texture2D texture, Vector2 position) : base(texture, position){
+        public Enemy(Texture2D texture, Vector2 position, Color color) : base(texture, position, color){
             hitbox.Size = new Point(10,10);
         }
 

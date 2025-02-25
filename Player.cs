@@ -13,7 +13,9 @@ namespace Monogame_test
         public List<Bullet> Bullets{
             get{return bullets;}
         }
-        public Player(Texture2D texture, Vector2 position) : base(texture, position){}
+        public Player(Texture2D texture, Vector2 position, Color color) : base(texture, position, color){
+            hitbox.Size = new Point(10,10);
+        }
 
         public override void Update(){
             KeyboardState kstate = Keyboard.GetState();
@@ -35,11 +37,12 @@ namespace Monogame_test
             vel.Normalize();
 
             if(mState.LeftButton == ButtonState.Pressed && oldState.LeftButton == ButtonState.Released){
-                Bullet bullet1 = new Bullet(texture, position, vel);
+                Bullet bullet1 = new Bullet(texture, position, Color.Yellow, vel);
                 bullets.Add(bullet1);
             }
 
             oldState = mState;
+            hitbox.Location = position.ToPoint();
         }
     }
 }
