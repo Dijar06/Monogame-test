@@ -13,7 +13,7 @@ namespace Monogame_test
 
         public override void Update(){
             timer += 1f/60f;
-            if(position.Y <= 0 || position.Y >= 460){
+            if(position.Y <= 0 || position.Y >= 470){
                 velocity *= -1;
             }
             if(timer >= 100){
